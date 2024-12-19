@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ros_distribution:
+          - humble
+          - iron
+          - rolling
+        include:
+          - ros_distribution: humble
+            ubuntu_version: jammy
+          - ros_distribution: iron
+            ubuntu_version: jammy
+          - ros_distribution: rolling
+            ubuntu_version: jammy
+            
+    container:
+      image: ubuntu:${{ matrix.ubuntu_version }}
+      
+    steps:
+    - uses: actions/checkout@v3
+      with:
+        submodules: recursive
+        
+    - name: Setup ROS 2
+      uses: ros-tooling/setup-ros@v0.6
+      with:
+        required-ros-distributions: ${{ matrix.ros_distribution }}
+        
+    - name: Install Dependencies
+      run: |
+        apt-get update
+        apt-get install -y \
+          python3-colcon-common-extensions \
+          python3-rosdep \
+          libboost-dev \
+          libxml2-dev
+          
+    - name: Build
+      run: |
+        . /opt/ros/${{ matrix.ros_distribution }}/setup.sh
+        colcon build --event-handlers console_direct+
+        
+    - name: Test
+      run: |
+        . /opt/ros/${{ matrix.ros_distribution }}/setup.sh
+        colcon test --event-handlers console_direct+
+        colcon test-result --verbose
