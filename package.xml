@@ -2,15 +2,35 @@
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>ros2_dbcppp</name>
-  <version>0.0.0</version>
-  <description>TODO: Package description</description>
-  <maintainer email="miltiadis.kallianis@rwth-aachen.de">rosdev</maintainer>
-  <license>TODO: License declaration</license>
-
+  <version>3.8.0</version>
+  <description>
+    ROS 2 wrapper for dbcppp - a high-performance DBC file parser based on boost.spirit.
+    Provides CAN bus message parsing and decoding functionality.
+  </description>
+  
+  <maintainer email="info@kallianis.de">Miltiadis Kallianis</maintainer>
+  <author>xR3b0rn</author>
+  
+  <license>Apache License 2.0</license>
+  
+  <url type="website">https://github.com/miltkall/ros2_dbcppp</url>
+  <url type="bugtracker">https://github.com/miltkall/ros2_dbcppp/issues</url>
+  <url type="repository">https://github.com/miltkall/ros2_dbcppp</url>
+  
   <buildtool_depend>ament_cmake</buildtool_depend>
-
+  <buildtool_depend>cmake</buildtool_depend>
+  
+  <build_depend>boost</build_depend>
+  <build_depend>libxml2-dev</build_depend>
+  
+  <exec_depend>boost</exec_depend>
+  <exec_depend>libxml2</exec_depend>
+  
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
+  <test_depend>ament_cmake_gtest</test_depend>
+
+  <doc_depend>doxygen</doc_depend>
 
   <export>
     <build_type>ament_cmake</build_type>
