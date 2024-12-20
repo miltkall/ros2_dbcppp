@@ -27,6 +27,11 @@ jobs:
       image: ubuntu:${{ matrix.ubuntu_version }}
       
     steps:
+    - name: Update git
+        run: |
+          apt-get update
+          apt-get install -y git
+
     - uses: actions/checkout@v3
       with:
         submodules: recursive
