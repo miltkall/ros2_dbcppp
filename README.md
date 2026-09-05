@@ -1,4 +1,4 @@
-# ros2_dbcppp CURRENTLY WORK IN PROGRESS
+# ros2_dbcppp
 
 ROS 2 wrapper for the dbcppp library, which provides DBC file parsing capabilities for CAN bus configurations.
 
